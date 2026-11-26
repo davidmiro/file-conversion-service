@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fcs
+    username: fcs
+    password: fcs
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+minio:
+  minio-url: http://localhost:9000
+  access-key: admin
+  secret-key: supersecretpassword
+  uploads-bucket: uploads
+  converted-bucket: converted

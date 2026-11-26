@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: dev
+
+  application:
+    name: file-conversion-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/fcs
+    username: fcs
+    password: ${FCS_DB_PASSWORD}
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: file-conversion-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    topics:
+      conversion-requested: file.conversion.requested
+      conversion-completed: file.conversion.completed
+
+server:
+  servlet:
+    context-path: /fcs
+
+minio:
+  minio-url: ${MINIO_URL}
+  access-key: ${MINIO_ACCESS_KEY}
+  secret-key: ${MINIO_SECRET_KEY}
+  uploads-bucket: uploads
+  converted-bucket: converted
